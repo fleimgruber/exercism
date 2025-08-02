@@ -1,0 +1,17 @@
+acronym.abbreviate : Text -> Text
+acronym.abbreviate =
+  toCharList
+    >> split (flip elem [?\s, ?-, ?_])
+    >> filterMap head
+    >> map toUpper
+    >> fromCharList
+
+> elem ?\s
+> flip (++) "a" "b"
+> toCharList "asdf fdsa"
+> elem ?\s [?a, ?b]
+> List.split (flip elem [?\s, ?-]) [?a, ?b, ?\s, ?c, ?d, ?-, ?e, ?f]
+
+---
+
+> fromCharList (map toUpper (filterMap head (split (flip elem [?\s, ?-, ?_]) (toCharList "asdf fdsa"))))

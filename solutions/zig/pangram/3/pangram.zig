@@ -1,0 +1,32 @@
+const std = @import("std");
+const ascii = std.ascii;
+
+pub fn isPangram(str: []const u8) bool {
+    if (str.len < 26) {
+        return false;
+    }
+
+    var seen = std.AutoHashMap(usize, void).init(std.testing.allocator);
+    defer seen.deinit();
+    for (str) |c| {
+        if (!ascii.isASCII(c) or !ascii.isAlphabetic(c) or ascii.isWhitespace(c)) {
+            continue;
+        }
+        var c_lower = ascii.toLower(c);
+        if (c_lower - 'a' > 26) {
+            continue;
+        }
+        if (!seen.contains(c_lower)) {
+            seen.put(c_lower, {}) catch unreachable;
+        }
+    }
+
+    const alphabet: []const u8 = "abcdefghijklmnopqrstuvwxyz";
+    for (alphabet) |a| {
+        if (!seen.contains(a)) {
+            return false;
+        }
+    }
+
+    return true;
+}
