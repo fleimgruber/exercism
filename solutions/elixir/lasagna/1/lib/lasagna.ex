@@ -1,0 +1,19 @@
+defmodule Lasagna do
+  def expected_minutes_in_oven() do
+    40
+  end
+
+  def remaining_minutes_in_oven(minutes) do
+    expected_minutes_in_oven() - minutes
+  end
+
+  def preparation_time_in_minutes(number_of_layers) do
+    2 * number_of_layers
+  end
+
+  def total_time_in_minutes(number_of_layers, time_in_oven) do
+    preparation_time_in_minutes(number_of_layers) + time_in_oven
+  end
+
+  def alarm(), do: "Ding!"
+end
